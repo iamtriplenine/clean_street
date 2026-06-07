@@ -652,7 +652,7 @@ footer{
           <label>Montant (FCFA)</label>
           <input type="number" id="don-montant" placeholder="Ex : 1000" min="100">
         </div>
-        <a href="#" id="wave-btn" class="wave-btn" target="_blank" rel="noopener">
+        <a href="https://pay.wave.com/m/M_ci_zuXWh0fj9YGV/c/ci/" id="wave-btn" class="wave-btn" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M7 13l3 3 7-7"/></svg>
           Payer avec Wave
         </a>
@@ -763,7 +763,7 @@ async function loadData(){
       document.getElementById('footer-logo').textContent = cfg.nom_asso;
     }
     if(cfg.lien_wave && cfg.lien_wave !== ''){
-      waveLink = cfg.lien_wave;
+      waveLink = cfg.lien_wave.replace(/^['"]|['"]$/g, '').trim();
       document.getElementById('wave-btn').href = waveLink;
     }
 
