@@ -4,50 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clean Street — Association</title>
-
-
-
 <meta property="og:title" content="Clean Street">
 <meta property="og:description" content="Association engagée pour des villes plus propres">
 <meta property="og:image" content="https://i.postimg.cc/PrrCJFhh/IMG-6043.png">
-<meta property="og:url" content="">
+<meta property="og:url" content="https://clean-street-one.vercel.app">
 <meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ton-domaine.com/images/apercu.jpg">
-
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* ========================
+   VARIABLES & RESET
+======================== */
 :root {
-  --bg: #e8f0f7;
-  --bg2: #d0e4f5;
-  --text: #0d1f2d;
-  --text2: #3a5068;
+  --bg: #eef4ef;
+  --bg2: #daeade;
+  --text: #0e1f12;
+  --text2: #4a6652;
   --accent: #1a7f5a;
-  --accent2: #0ea96e;
-  --glass: rgba(255,255,255,0.35);
-  --glass-border: rgba(255,255,255,0.6);
-  --glass-shadow: rgba(0,80,60,0.12);
-  --blur: blur(18px) saturate(180%);
-  --card-bg: rgba(255,255,255,0.28);
-  --overlay: rgba(255,255,255,0.15);
+  --accent2: #0dbf7e;
+  --accent-light: rgba(26,127,90,0.12);
+  --glass: rgba(255,255,255,0.42);
+  --glass-border: rgba(255,255,255,0.65);
+  --glass-shadow: rgba(0,60,30,0.10);
+  --blur: blur(20px) saturate(180%);
+  --card-bg: rgba(255,255,255,0.32);
+  --overlay: rgba(255,255,255,0.18);
+  --input-bg: rgba(255,255,255,0.6);
+  --nav-h: 70px;
+  --r: 20px;
+  --r-lg: 28px;
 }
 [data-theme="dark"] {
-  --bg: #091520;
-  --bg2: #0d2035;
-  --text: #e0f0ea;
-  --text2: #89b8a8;
+  --bg: #08120e;
+  --bg2: #0d1f16;
+  --text: #dff0e6;
+  --text2: #7db89a;
   --accent: #2ecc8f;
   --accent2: #1aff99;
-  --glass: rgba(10,30,50,0.45);
-  --glass-border: rgba(255,255,255,0.12);
-  --glass-shadow: rgba(0,0,0,0.35);
-  --card-bg: rgba(15,35,55,0.5);
-  --overlay: rgba(0,0,0,0.2);
+  --accent-light: rgba(46,204,143,0.12);
+  --glass: rgba(8,25,15,0.5);
+  --glass-border: rgba(255,255,255,0.10);
+  --glass-shadow: rgba(0,0,0,0.4);
+  --card-bg: rgba(10,30,20,0.55);
+  --overlay: rgba(0,0,0,0.22);
+  --input-bg: rgba(10,30,20,0.6);
 }
+
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;font-size:16px;}
 body{
   font-family:'DM Sans',sans-serif;
   background:var(--bg);
@@ -57,96 +61,127 @@ body{
   overflow-x:hidden;
 }
 
-/* BG MESH */
+/* BACKGROUND */
 .bg-mesh{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(30,180,120,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(20,100,200,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(100,200,160,0.1) 0%, transparent 70%);
-  transition:all .4s;
+    radial-gradient(ellipse 70% 55% at 15% 8%, rgba(30,180,100,0.22) 0%,transparent 55%),
+    radial-gradient(ellipse 55% 70% at 85% 85%, rgba(10,140,80,0.14) 0%,transparent 55%),
+    radial-gradient(ellipse 45% 45% at 50% 50%, rgba(80,200,140,0.08) 0%,transparent 65%);
 }
 [data-theme="dark"] .bg-mesh{
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,200,100,0.1) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(0,80,160,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,100,60,0.08) 0%, transparent 70%);
+    radial-gradient(ellipse 70% 55% at 15% 8%, rgba(0,180,90,0.12) 0%,transparent 55%),
+    radial-gradient(ellipse 55% 70% at 85% 85%, rgba(0,100,50,0.10) 0%,transparent 55%),
+    radial-gradient(ellipse 45% 45% at 50% 50%, rgba(0,80,40,0.07) 0%,transparent 65%);
 }
 
-/* NAVBAR */
+/* ========================
+   NAVBAR
+======================== */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 2rem;
+  padding:0 2rem;height:var(--nav-h);
   background:var(--glass);
   backdrop-filter:var(--blur);
   -webkit-backdrop-filter:var(--blur);
   border-bottom:1px solid var(--glass-border);
-  box-shadow:0 4px 24px var(--glass-shadow);
+  box-shadow:0 2px 20px var(--glass-shadow);
 }
 .nav-logo{
   font-family:'Playfair Display',serif;
-  font-size:1.5rem;font-weight:900;
+  font-size:1.4rem;font-weight:900;
   color:var(--accent);
-  letter-spacing:-0.02em;
   display:flex;align-items:center;gap:.5rem;
+  text-decoration:none;
 }
 .nav-logo span{color:var(--text);font-weight:400;}
-.nav-links{display:flex;gap:1.5rem;align-items:center;}
-.nav-links a{
-  color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;
-  transition:color .2s;
+.nav-center{display:flex;gap:2rem;align-items:center;}
+.nav-center a{
+  color:var(--text2);text-decoration:none;font-size:.88rem;font-weight:500;
+  transition:color .2s;padding:.3rem 0;border-bottom:2px solid transparent;
 }
-.nav-links a:hover{color:var(--accent);}
-.theme-btn{
-  background:var(--glass);
-  border:1px solid var(--glass-border);
-  backdrop-filter:var(--blur);
-  border-radius:50%;width:40px;height:40px;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .3s;color:var(--text);
+.nav-center a:hover{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-right{display:flex;gap:.6rem;align-items:center;}
+.icon-btn{
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:var(--blur);border-radius:50%;
+  width:40px;height:40px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text);transition:all .25s;
 }
-.theme-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.icon-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+.mobile-menu{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;z-index:190;
+  background:var(--glass);backdrop-filter:var(--blur);
+  border-bottom:1px solid var(--glass-border);
+  padding:1.5rem 2rem;flex-direction:column;gap:1.2rem;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--text2);text-decoration:none;font-size:1rem;font-weight:500;padding:.5rem 0;border-bottom:1px solid var(--glass-border);}
 
-/* HERO */
+/* ========================
+   HERO
+======================== */
 .hero{
   position:relative;z-index:1;
   min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:6rem 2rem 4rem;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:calc(var(--nav-h) + 2rem) 2rem 4rem;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:.5rem;
-  background:var(--glass);
-  border:1px solid var(--glass-border);
-  backdrop-filter:var(--blur);
-  border-radius:999px;padding:.4rem 1.2rem;
-  font-size:.8rem;font-weight:500;color:var(--accent);
-  margin-bottom:1.5rem;
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:var(--blur);border-radius:999px;
+  padding:.4rem 1.2rem;font-size:.78rem;font-weight:600;
+  color:var(--accent);margin-bottom:2rem;letter-spacing:.03em;text-transform:uppercase;
   animation:fadeUp .6s ease both;
 }
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2.8rem,7vw,5.5rem);
+  font-size:clamp(2.8rem,7vw,5.8rem);
   font-weight:900;line-height:1.05;
   color:var(--text);
   animation:fadeUp .7s .1s ease both;
 }
-.hero h1 em{color:var(--accent);font-style:normal;}
-.hero p{
-  max-width:560px;margin:1.5rem auto 0;
-  font-size:1.1rem;color:var(--text2);line-height:1.7;
+.hero h1 em{color:var(--accent);font-style:italic;}
+.hero-sub{
+  max-width:560px;margin:1.8rem auto 0;
+  font-size:1.05rem;color:var(--text2);line-height:1.75;
   animation:fadeUp .7s .2s ease both;
 }
 .hero-btns{
   display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;
   animation:fadeUp .7s .3s ease both;
 }
+.hero-stats{
+  display:flex;gap:3rem;margin-top:4rem;flex-wrap:wrap;justify-content:center;
+  animation:fadeUp .7s .4s ease both;
+}
+.hero-stat{text-align:center;}
+.hero-stat-num{
+  font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;
+  color:var(--accent);display:block;
+}
+.hero-stat-label{font-size:.8rem;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:.05em;}
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--text2);font-size:.75rem;animation:bounce 2s infinite;
+}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--text2);border-bottom:2px solid var(--text2);transform:rotate(45deg);}
+
+/* BUTTONS */
 .btn{
   display:inline-flex;align-items:center;gap:.5rem;
   padding:.85rem 2rem;border-radius:999px;
-  font-size:.95rem;font-weight:500;cursor:pointer;
+  font-size:.92rem;font-weight:600;cursor:pointer;
   text-decoration:none;border:none;transition:all .25s;
+  font-family:'DM Sans',sans-serif;
 }
 .btn-primary{
   background:var(--accent);color:#fff;
@@ -155,203 +190,293 @@ nav{
 .btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,127,90,0.45);}
 .btn-glass{
   background:var(--glass);color:var(--text);
-  border:1px solid var(--glass-border);
-  backdrop-filter:var(--blur);
+  border:1px solid var(--glass-border);backdrop-filter:var(--blur);
 }
 .btn-glass:hover{background:var(--glass-border);transform:translateY(-2px);}
 
-/* SLIDER */
-.slider-section{position:relative;z-index:1;padding:3rem 2rem;max-width:1100px;margin:0 auto;}
-.slider-wrap{
-  position:relative;overflow:hidden;border-radius:24px;
-  background:var(--glass);backdrop-filter:var(--blur);
-  border:1px solid var(--glass-border);
-  box-shadow:0 8px 40px var(--glass-shadow);
-  aspect-ratio:16/6;
+/* ========================
+   SECTIONS
+======================== */
+.section-wrap{position:relative;z-index:1;padding:6rem 2rem;max-width:1120px;margin:0 auto;}
+.section-header{margin-bottom:3.5rem;}
+.section-eyebrow{
+  display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;
 }
-.slide{
-  position:absolute;inset:0;opacity:0;transition:opacity .7s ease;
-  display:flex;align-items:flex-end;
-}
-.slide.active{opacity:1;}
-.slide img{width:100%;height:100%;object-fit:cover;border-radius:24px;}
-.slide-caption{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:2rem;
-  background:linear-gradient(transparent,rgba(0,0,0,0.5));
-  border-radius:0 0 24px 24px;
-  color:#fff;font-size:1rem;font-weight:500;
-}
-.slide-dots{
-  display:flex;justify-content:center;gap:.5rem;margin-top:1rem;
-}
-.dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--text2);opacity:.4;cursor:pointer;transition:all .3s;
-}
-.dot.active{opacity:1;background:var(--accent);width:24px;border-radius:4px;}
-
-/* SECTIONS */
-section{position:relative;z-index:1;padding:5rem 2rem;max-width:1100px;margin:0 auto;}
 .section-title{
   font-family:'Playfair Display',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;
-  color:var(--text);margin-bottom:.5rem;
+  font-size:clamp(1.9rem,4vw,3rem);font-weight:700;
+  color:var(--text);line-height:1.15;
 }
-.section-sub{color:var(--text2);font-size:1rem;margin-bottom:3rem;}
+.section-sub{color:var(--text2);font-size:1rem;margin-top:.6rem;line-height:1.7;}
+.section-divider{
+  width:60px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border-radius:2px;margin:.8rem 0 0;
+}
 
-/* DONS */
-.collectes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
-.collecte-card{
-  background:var(--card-bg);
-  backdrop-filter:var(--blur);
+/* ========================
+   SLIDER
+======================== */
+.slider-section{position:relative;z-index:1;padding:0 2rem 4rem;max-width:1120px;margin:0 auto;}
+.slider-outer{position:relative;}
+.slider-wrap{
+  position:relative;overflow:hidden;border-radius:var(--r-lg);
+  background:var(--glass);backdrop-filter:var(--blur);
   border:1px solid var(--glass-border);
-  border-radius:20px;padding:1.8rem;
-  box-shadow:0 4px 24px var(--glass-shadow);
+  box-shadow:0 12px 50px var(--glass-shadow);
+  aspect-ratio:16/7;
+}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;}
+.slide.active{opacity:1;}
+.slide img{width:100%;height:100%;object-fit:cover;}
+.slide-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+}
+.slide-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:1.5rem 2rem;color:#fff;
+}
+.slide-caption strong{font-size:1.1rem;font-weight:600;display:block;}
+.slide-caption span{font-size:.85rem;opacity:.8;}
+.slider-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  display:flex;justify-content:space-between;width:100%;
+  padding:0 1rem;pointer-events:none;
+}
+.slider-arrow{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.25);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.4);
+  color:#fff;cursor:pointer;pointer-events:all;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.slider-arrow:hover{background:rgba(255,255,255,0.4);}
+.slide-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem;}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--text2);opacity:.35;cursor:pointer;transition:all .3s;
+}
+.dot.active{opacity:1;background:var(--accent);width:28px;border-radius:4px;}
+
+/* ========================
+   COLLECTES
+======================== */
+.collectes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+.collecte-card{
+  background:var(--card-bg);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-border);border-radius:var(--r);
+  padding:1.8rem;box-shadow:0 4px 24px var(--glass-shadow);
   transition:transform .3s,box-shadow .3s;
 }
-.collecte-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px var(--glass-shadow);}
-.collecte-nom{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.5rem;}
-.collecte-progress-wrap{
-  background:var(--overlay);border-radius:999px;height:8px;margin:1rem 0;overflow:hidden;
+.collecte-card:hover{transform:translateY(-5px);box-shadow:0 16px 45px var(--glass-shadow);}
+.collecte-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--accent-light);display:flex;align-items:center;justify-content:center;
+  color:var(--accent);margin-bottom:1.2rem;
 }
-.collecte-progress{
+.collecte-nom{
+  font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;
+  margin-bottom:1rem;
+}
+.prog-wrap{
+  background:var(--overlay);border-radius:999px;height:7px;margin:1rem 0;overflow:hidden;
+}
+.prog-bar{
   height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));
-  border-radius:999px;transition:width .8s ease;
+  border-radius:999px;transition:width 1s ease;
 }
-.collecte-amounts{display:flex;justify-content:space-between;font-size:.85rem;color:var(--text2);}
-.collecte-amounts strong{color:var(--accent);}
+.collecte-amounts{display:flex;justify-content:space-between;font-size:.82rem;color:var(--text2);}
+.collecte-amounts strong{color:var(--accent);font-weight:600;}
+.collecte-pct{
+  font-size:.8rem;color:var(--accent);font-weight:700;
+  margin-top:.3rem;
+}
 
-/* FORM DON */
+/* ========================
+   FORM DON
+======================== */
+.don-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:3rem;}
+@media(max-width:800px){.don-grid{grid-template-columns:1fr;}}
+.don-info h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:1rem;}
+.don-info p{color:var(--text2);line-height:1.7;margin-bottom:1.5rem;}
+.don-steps{display:flex;flex-direction:column;gap:1rem;}
+.don-step{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--card-bg);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-border);border-radius:var(--r);padding:1rem 1.2rem;
+}
+.step-num{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;font-weight:700;flex-shrink:0;
+}
+.step-text{font-size:.88rem;color:var(--text2);line-height:1.5;}
+.step-text strong{color:var(--text);display:block;font-size:.92rem;}
 .don-form{
   background:var(--card-bg);backdrop-filter:var(--blur);
-  border:1px solid var(--glass-border);border-radius:24px;padding:2.5rem;
-  box-shadow:0 8px 40px var(--glass-shadow);max-width:540px;
+  border:1px solid var(--glass-border);border-radius:var(--r-lg);
+  padding:2.5rem;box-shadow:0 8px 40px var(--glass-shadow);
 }
-.form-group{margin-bottom:1.2rem;}
-.form-group label{display:block;font-size:.85rem;font-weight:500;color:var(--text2);margin-bottom:.4rem;}
+.form-group{margin-bottom:1.3rem;}
+.form-group label{
+  display:block;font-size:.82rem;font-weight:600;
+  color:var(--text2);margin-bottom:.45rem;text-transform:uppercase;letter-spacing:.03em;
+}
 .form-group input,.form-group select{
   width:100%;padding:.85rem 1.2rem;
-  background:var(--glass);backdrop-filter:var(--blur);
-  border:1px solid var(--glass-border);border-radius:12px;
+  background:var(--input-bg);backdrop-filter:var(--blur);
+  border:1.5px solid var(--glass-border);border-radius:12px;
   color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;
   outline:none;transition:border-color .2s,box-shadow .2s;
+  -webkit-appearance:none;
 }
 .form-group input:focus,.form-group select:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(26,127,90,0.15);
+  border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,127,90,0.15);
 }
-.wave-link{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.75rem 1.5rem;border-radius:12px;
-  background:linear-gradient(135deg,#1a7f5a,#0ea96e);
-  color:#fff;text-decoration:none;font-weight:500;font-size:.9rem;
-  margin-bottom:1rem;transition:all .25s;
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select{color:var(--text);}
+.wave-btn{
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  width:100%;padding:.9rem 1.5rem;border-radius:12px;
+  background:linear-gradient(135deg,#1a7f5a,#0dbf7e);
+  color:#fff;text-decoration:none;font-weight:600;font-size:.92rem;
+  margin-bottom:1.2rem;transition:all .25s;
   box-shadow:0 4px 16px rgba(26,127,90,0.3);
 }
-.wave-link:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,127,90,0.4);}
+.wave-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,127,90,0.4);}
 
-/* MEMBRES */
-.membres-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.5rem;}
+/* ========================
+   MEMBRES
+======================== */
+.membres-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1.5rem;}
 .membre-card{
   background:var(--card-bg);backdrop-filter:var(--blur);
-  border:1px solid var(--glass-border);border-radius:20px;
+  border:1px solid var(--glass-border);border-radius:var(--r);
   padding:1.5rem 1rem;text-align:center;
   box-shadow:0 4px 20px var(--glass-shadow);
   transition:transform .3s,box-shadow .3s;cursor:pointer;
 }
-.membre-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px var(--glass-shadow);}
+.membre-card:hover{transform:translateY(-7px);box-shadow:0 18px 45px var(--glass-shadow);}
 .membre-avatar{
-  width:80px;height:80px;border-radius:50%;
-  object-fit:cover;margin:0 auto 1rem;
+  width:82px;height:82px;border-radius:50%;object-fit:cover;
+  margin:0 auto .9rem;display:block;
   border:3px solid var(--glass-border);
-  display:block;background:var(--overlay);
+  background:var(--overlay);transition:border-color .2s;
 }
-.membre-nom{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:.3rem;}
-.membre-role{font-size:.8rem;color:var(--accent);font-weight:500;}
+.membre-card:hover .membre-avatar{border-color:var(--accent);}
+.membre-nom{font-family:'Playfair Display',serif;font-weight:700;font-size:.98rem;margin-bottom:.3rem;}
+.membre-role{font-size:.78rem;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
 .membre-qr{
   display:inline-flex;align-items:center;gap:.3rem;
-  margin-top:.8rem;font-size:.75rem;color:var(--text2);
-  text-decoration:none;
+  margin-top:.8rem;font-size:.73rem;color:var(--text2);
   background:var(--glass);border:1px solid var(--glass-border);
   border-radius:999px;padding:.25rem .75rem;transition:all .2s;
 }
-.membre-qr:hover{color:var(--accent);border-color:var(--accent);}
+.membre-card:hover .membre-qr{color:var(--accent);border-color:var(--accent);}
 
-/* PROFIL MEMBRE PAGE */
+/* ========================
+   PROFIL OVERLAY
+======================== */
 #profil-page{
-  display:none;position:fixed;inset:0;z-index:200;
-  background:var(--glass);backdrop-filter:blur(30px) saturate(200%);
-  align-items:center;justify-content:center;flex-direction:column;
-  text-align:center;padding:2rem;
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+  padding:2rem;
 }
-#profil-page.show{display:flex;}
+#profil-page.show{display:flex;animation:fadeIn .3s ease;}
 .profil-card{
   background:var(--card-bg);backdrop-filter:var(--blur);
-  border:1px solid var(--glass-border);border-radius:28px;
-  padding:3rem 2.5rem;max-width:400px;width:100%;
-  box-shadow:0 20px 60px var(--glass-shadow);
-  animation:scaleIn .4s ease;
+  border:1px solid var(--glass-border);border-radius:var(--r-lg);
+  padding:3rem 2.5rem;max-width:420px;width:100%;position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,0.3);
+  animation:scaleIn .35s ease;text-align:center;
 }
 .profil-avatar{
-  width:120px;height:120px;border-radius:50%;
-  object-fit:cover;margin:0 auto 1.5rem;display:block;
+  width:110px;height:110px;border-radius:50%;object-fit:cover;
+  margin:0 auto 1.5rem;display:block;
   border:4px solid var(--accent);
 }
-.profil-nom{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;margin-bottom:.3rem;}
-.profil-role{color:var(--accent);font-weight:500;margin-bottom:1rem;}
-.profil-desc{color:var(--text2);line-height:1.6;font-size:.95rem;margin-bottom:1.5rem;}
+.profil-nom{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;margin-bottom:.3rem;}
+.profil-role{color:var(--accent);font-weight:600;margin-bottom:1rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;}
+.profil-desc{color:var(--text2);line-height:1.65;font-size:.92rem;margin-bottom:1.5rem;}
 .profil-id{
-  font-size:.75rem;color:var(--text2);
-  background:var(--overlay);border-radius:8px;padding:.4rem .8rem;
+  font-size:.72rem;color:var(--text2);
+  background:var(--overlay);border-radius:8px;padding:.35rem .75rem;
   font-family:monospace;margin-bottom:1rem;display:inline-block;
 }
-.close-profil{
-  position:absolute;top:1.5rem;right:1.5rem;
+.profil-close{
+  position:absolute;top:1.2rem;right:1.2rem;
   background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:50%;width:40px;height:40px;
-  cursor:pointer;color:var(--text);font-size:1.2rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
+  border-radius:50%;width:36px;height:36px;cursor:pointer;
+  color:var(--text);font-size:1rem;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
 }
-.close-profil:hover{background:var(--accent);color:#fff;}
+.profil-close:hover{background:#e74c3c;color:#fff;border-color:#e74c3c;}
 
-/* FOOTER */
+/* ========================
+   FOOTER
+======================== */
 footer{
   position:relative;z-index:1;
-  text-align:center;padding:2rem;
+  text-align:center;padding:3rem 2rem;
   color:var(--text2);font-size:.85rem;
   border-top:1px solid var(--glass-border);
+  background:var(--glass);backdrop-filter:var(--blur);
 }
+.footer-logo{
+  font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;
+  color:var(--accent);margin-bottom:1rem;display:inline-block;
+}
+.footer-links{display:flex;justify-content:center;gap:2rem;margin:1rem 0;flex-wrap:wrap;}
+.footer-links a{color:var(--text2);text-decoration:none;font-size:.85rem;transition:color .2s;}
+.footer-links a:hover{color:var(--accent);}
+.footer-copy{margin-top:1rem;font-size:.78rem;opacity:.6;}
 
-/* TOAST */
+/* ========================
+   TOAST
+======================== */
 .toast{
-  position:fixed;bottom:2rem;right:2rem;z-index:300;
+  position:fixed;bottom:2rem;right:2rem;z-index:600;
   background:var(--accent);color:#fff;
-  padding:1rem 1.5rem;border-radius:12px;
+  padding:1rem 1.5rem;border-radius:14px;
   font-size:.9rem;font-weight:500;
   box-shadow:0 8px 24px rgba(0,0,0,0.2);
   transform:translateY(100px);opacity:0;
-  transition:all .3s;pointer-events:none;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;max-width:320px;
 }
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.error{background:#e74c3c;}
 
-/* LOADER */
-.loading{
-  text-align:center;padding:3rem;color:var(--text2);
-  font-size:.9rem;
+/* ========================
+   UTILITAIRES
+======================== */
+.loading{text-align:center;padding:3rem;color:var(--text2);font-size:.9rem;}
+.empty{
+  text-align:center;padding:3rem;color:var(--text2);font-size:.9rem;
+  background:var(--card-bg);border:1px dashed var(--glass-border);border-radius:var(--r);
 }
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.9);}to{opacity:1;transform:scale(1);}}
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
 
-@media(max-width:600px){
-  nav{padding:.8rem 1.2rem;}
-  .nav-links{display:none;}
-  .hero h1{font-size:2.4rem;}
+/* ========================
+   RESPONSIVE
+======================== */
+@media(max-width:700px){
+  .nav-center{display:none;}
+  .hamburger{display:flex;}
+  .hero h1{font-size:2.5rem;}
   .membres-grid{grid-template-columns:repeat(2,1fr);}
   .collectes-grid{grid-template-columns:1fr;}
+  .section-wrap{padding:4rem 1.2rem;}
+  nav{padding:0 1.2rem;}
 }
 </style>
 </head>
@@ -359,44 +484,57 @@ footer{
 
 <div class="bg-mesh"></div>
 
-<!-- PROFIL PAGE -->
+<!-- PROFIL OVERLAY -->
 <div id="profil-page">
-  <button class="close-profil" onclick="closeProfil()">✕</button>
   <div class="profil-card" id="profil-content"></div>
 </div>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav>
-  <div class="nav-logo">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="2"/>
-      <path d="M8 16c2-4 10-4 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="10" cy="12" r="1.5" fill="currentColor"/>
-      <circle cx="18" cy="12" r="1.5" fill="currentColor"/>
+  <a href="#" class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <circle cx="13" cy="13" r="12" stroke="currentColor" stroke-width="2"/>
+      <path d="M7 15c1.5-3.5 10.5-3.5 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M9 10.5c0 .83-.67 1.5-1.5 1.5S6 11.33 6 10.5 6.67 9 7.5 9 9 9.67 9 10.5z" fill="currentColor"/>
+      <path d="M20 10.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5S17.67 9 18.5 9 20 9.67 20 10.5z" fill="currentColor"/>
     </svg>
     Clean<span>Street</span>
-  </div>
-  <div class="nav-links">
+  </a>
+  <div class="nav-center">
     <a href="#activites">Activités</a>
+    <a href="#collectes">Collectes</a>
     <a href="#dons">Faire un don</a>
-    <a href="#membres">Membres</a>
+    <a href="#membres">Notre équipe</a>
   </div>
-  <button class="theme-btn" onclick="toggleTheme()" title="Mode sombre/clair">
-    <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="12" r="5"/>
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-    </svg>
-  </button>
+  <div class="nav-right">
+    <button class="icon-btn" onclick="toggleTheme()" title="Mode sombre/clair">
+      <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </button>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#activites" onclick="closeMenu()">Activités</a>
+  <a href="#collectes" onclick="closeMenu()">Collectes</a>
+  <a href="#dons" onclick="closeMenu()">Faire un don</a>
+  <a href="#membres" onclick="closeMenu()">Notre équipe</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-badge">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    Association engagée pour des villes propres
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Association citoyenne engagée
   </div>
   <h1>Ensemble pour des<br/><em>rues plus propres</em></h1>
-  <p id="hero-desc">Nous œuvrons chaque jour pour la propreté de nos communes. Rejoignez-nous ou soutenez notre cause en faisant un don.</p>
+  <p class="hero-sub" id="hero-desc">Nous œuvrons chaque jour pour la propreté de nos communes. Rejoignez-nous ou soutenez notre cause en faisant un don.</p>
   <div class="hero-btns">
     <a href="#dons" class="btn btn-primary">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -404,246 +542,393 @@ footer{
     </a>
     <a href="#membres" class="btn btn-glass">Voir l'équipe</a>
   </div>
+  <div class="hero-stats" id="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-num" id="stat-membres">—</span><span class="hero-stat-label">Membres actifs</span></div>
+    <div class="hero-stat"><span class="hero-stat-num" id="stat-collectes">—</span><span class="hero-stat-label">Collectes</span></div>
+    <div class="hero-stat"><span class="hero-stat-num" id="stat-dons">—</span><span class="hero-stat-label">Dons collectés</span></div>
+  </div>
+  <div class="scroll-hint">
+    <span>Découvrir</span>
+    <div class="scroll-arrow"></div>
+  </div>
 </div>
 
 <!-- SLIDER -->
 <div class="slider-section" id="activites">
-  <div class="section-title">Nos activités</div>
-  <div class="section-sub">Ce que nous faisons sur le terrain</div>
-  <div class="slider-wrap" id="slider-wrap">
-    <div class="loading">Chargement des images…</div>
+  <div class="section-header">
+    <span class="section-eyebrow">🌿 Sur le terrain</span>
+    <div class="section-title">Nos activités</div>
+    <div class="section-sub">Ce que nous faisons au quotidien pour nos communes</div>
+    <div class="section-divider"></div>
+  </div>
+  <div class="slider-outer">
+    <div class="slider-wrap" id="slider-wrap">
+      <div class="loading">Chargement des images…</div>
+    </div>
+    <div class="slider-nav">
+      <button class="slider-arrow" onclick="goSlide(currentSlide-1)" title="Précédent">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="slider-arrow" onclick="goSlide(currentSlide+1)" title="Suivant">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
   </div>
   <div class="slide-dots" id="slider-dots"></div>
 </div>
 
-<!-- DONS -->
-<section id="dons">
-  <div class="section-title">Soutenez nos collectes</div>
-  <div class="section-sub">Chaque don contribue à garder nos rues propres</div>
-  <div class="collectes-grid" id="collectes-grid">
-    <div class="loading">Chargement…</div>
+<!-- COLLECTES -->
+<section id="collectes">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-eyebrow">💚 Financement participatif</span>
+      <div class="section-title">Nos collectes</div>
+      <div class="section-sub">Chaque don contribue directement à garder nos rues propres</div>
+      <div class="section-divider"></div>
+    </div>
+    <div class="collectes-grid" id="collectes-grid">
+      <div class="loading">Chargement…</div>
+    </div>
   </div>
+</section>
 
-  <div style="margin-top:3rem;">
-    <div class="section-title" style="font-size:1.6rem;">Faire un don</div>
-    <div class="section-sub">Paiement via Wave — simple et sécurisé</div>
-    <div class="don-form">
-      <div class="form-group">
-        <label>Votre prénom et nom</label>
-        <input type="text" id="don-nom" placeholder="Ex: Kouamé Yao">
+<!-- FORM DON -->
+<section id="dons">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-eyebrow">💸 Paiement sécurisé</span>
+      <div class="section-title">Faire un don</div>
+      <div class="section-sub">Paiement simple et rapide via Wave Mobile Money</div>
+      <div class="section-divider"></div>
+    </div>
+    <div class="don-grid">
+      <!-- Côté info -->
+      <div class="don-info">
+        <h3>Votre don, un impact réel</h3>
+        <p>100% des dons collectés sont reversés directement aux opérations de nettoyage dans vos communes.</p>
+        <div class="don-steps">
+          <div class="don-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <strong>Choisissez une collecte</strong>
+              Sélectionnez la commune ou l'opération que vous souhaitez soutenir.
+            </div>
+          </div>
+          <div class="don-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <strong>Payez via Wave</strong>
+              Cliquez sur le bouton Wave, effectuez votre paiement en 30 secondes.
+            </div>
+          </div>
+          <div class="don-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <strong>Copiez votre ID de transaction</strong>
+              Notez l'identifiant de votre paiement et collez-le dans le formulaire.
+            </div>
+          </div>
+          <div class="don-step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <strong>Validez — c'est tout !</strong>
+              Notre équipe vérifie et confirme votre don sous 24h.
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Choisir une collecte</label>
-        <select id="don-collecte"></select>
-      </div>
-      <div class="form-group">
-        <label>Montant (FCFA)</label>
-        <input type="number" id="don-montant" placeholder="Ex: 1000" min="100">
-      </div>
-      <div style="margin:1.2rem 0;">
-        <p style="font-size:.85rem;color:var(--text2);margin-bottom:.8rem;">1. Cliquez sur le bouton Wave pour payer :</p>
-        <a href="#" id="wave-btn" class="wave-link" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+
+      <!-- Formulaire -->
+      <div class="don-form">
+        <div class="form-group">
+          <label>Votre prénom et nom</label>
+          <input type="text" id="don-nom" placeholder="Ex : Kouamé Yao">
+        </div>
+        <div class="form-group">
+          <label>Choisir une collecte</label>
+          <select id="don-collecte"></select>
+        </div>
+        <div class="form-group">
+          <label>Montant (FCFA)</label>
+          <input type="number" id="don-montant" placeholder="Ex : 1000" min="100">
+        </div>
+        <a href="#" id="wave-btn" class="wave-btn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M7 13l3 3 7-7"/></svg>
           Payer avec Wave
         </a>
+        <div class="form-group">
+          <label>ID de transaction Wave</label>
+          <input type="text" id="don-txid" placeholder="Ex : TXN-XXXXXXXXXX">
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:1rem;" onclick="soumettredon()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Valider mon don
+        </button>
       </div>
-      <div class="form-group">
-        <label>2. Entrez l'ID de la transaction Wave</label>
-        <input type="text" id="don-txid" placeholder="Ex: TXN-XXXXXXXXXX">
-      </div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="soumettredon()">
-        Valider mon don
-      </button>
     </div>
   </div>
 </section>
 
 <!-- MEMBRES -->
 <section id="membres">
-  <div class="section-title">Notre équipe</div>
-  <div class="section-sub">Les membres qui font vivre l'association</div>
-  <div class="membres-grid" id="membres-grid">
-    <div class="loading">Chargement…</div>
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-eyebrow">👥 L'association</span>
+      <div class="section-title">Notre équipe</div>
+      <div class="section-sub">Les membres qui font vivre Clean Street au quotidien</div>
+      <div class="section-divider"></div>
+    </div>
+    <div class="membres-grid" id="membres-grid">
+      <div class="loading">Chargement…</div>
+    </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p id="footer-nom">Clean Street</p>
-  <p style="margin-top:.5rem;font-size:.8rem;">© 2025 — Tous droits réservés</p>
+  <div class="footer-logo" id="footer-logo">Clean Street</div>
+  <p style="color:var(--text2);max-width:400px;margin:0 auto;">Association citoyenne engagée pour la propreté de nos villes et communes.</p>
+  <div class="footer-links">
+    <a href="#activites">Activités</a>
+    <a href="#collectes">Collectes</a>
+    <a href="#dons">Faire un don</a>
+    <a href="#membres">Équipe</a>
+  </div>
+  <div class="footer-copy">© 2025 Clean Street — Tous droits réservés</div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const API = "https://ton-backend.onrender.com";
+/* ========================
+   CONFIG
+======================== */
+const API = "https://backend-xxgf.onrender.com"; // ← remplace par ton URL Render
 let waveLink = 'https://pay.wave.com/m/M_ci_zuXWh0fj9YGV/c/ci/';
-let collectes = [];
-let slides = [];
-let currentSlide = 0;
-let slideInterval;
+let collectes = [], slides = [], currentSlide = 0, slideInterval;
 
-// THEME
+/* ========================
+   THEME
+======================== */
 function toggleTheme(){
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('cs-theme', isDark ? 'light' : 'dark');
   updateThemeIcon(!isDark);
 }
 function updateThemeIcon(dark){
-  const icon = document.getElementById('theme-icon');
-  if(dark){
-    icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-  } else {
-    icon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
-  }
+  const ic = document.getElementById('theme-icon');
+  ic.innerHTML = dark
+    ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" stroke="none"/>'
+    : '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
 }
-const savedTheme = localStorage.getItem('theme') || 'light';
+const savedTheme = localStorage.getItem('cs-theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 updateThemeIcon(savedTheme === 'dark');
 
-// TOAST
+/* ========================
+   MENU MOBILE
+======================== */
+function toggleMenu(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+/* ========================
+   TOAST
+======================== */
 function showToast(msg, err=false){
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'toast show' + (err?' error':'');
-  setTimeout(()=>t.className='toast',3000);
+  t.className = 'toast show' + (err ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 3500);
 }
 
-// LOAD DATA
+/* ========================
+   LOAD DATA
+======================== */
 async function loadData(){
   try {
     const r = await fetch(`${API}/cs/accueil`);
     const d = await r.json();
     if(!d.success) return;
+    const cfg = d.config || {};
 
-    // config
-    if(d.config.texte_accueil) document.getElementById('hero-desc').textContent = d.config.texte_accueil;
-    if(d.config.nom_asso){
-      document.querySelector('.nav-logo').innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="2"/><path d="M8 16c2-4 10-4 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="12" r="1.5" fill="currentColor"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg>${d.config.nom_asso}`;
-      document.title = d.config.nom_asso;
-      document.getElementById('footer-nom').textContent = d.config.nom_asso;
+    if(cfg.texte_accueil) document.getElementById('hero-desc').textContent = cfg.texte_accueil;
+    if(cfg.nom_asso){
+      document.querySelector('.nav-logo').innerHTML = `<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="currentColor" stroke-width="2"/><path d="M7 15c1.5-3.5 10.5-3.5 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>${cfg.nom_asso}`;
+      document.title = cfg.nom_asso;
+      document.getElementById('footer-logo').textContent = cfg.nom_asso;
     }
-    if(d.config.lien_wave) {
-      waveLink = d.config.lien_wave;
-      document.getElementById('wave-btn').href = waveLink || '#';
+    if(cfg.lien_wave && cfg.lien_wave !== ''){
+      waveLink = cfg.lien_wave;
+      document.getElementById('wave-btn').href = waveLink;
     }
 
-    // slider
+    // Stats héro
+    const membres = d.membres || [];
+    const colls = d.collectes || [];
+    const totalDons = colls.reduce((s,c) => s + parseFloat(c.montant_actuel||0), 0);
+    animNum('stat-membres', membres.length);
+    animNum('stat-collectes', colls.length);
+    document.getElementById('stat-dons').textContent = totalDons >= 1000
+      ? (totalDons/1000).toFixed(0)+'k FCFA' : totalDons+' FCFA';
+
     slides = d.images || [];
     renderSlider();
 
-    // collectes
-    collectes = d.collectes || [];
+    collectes = colls;
     renderCollectes();
 
-    // membres
-    renderMembres(d.membres || []);
-
+    renderMembres(membres);
   } catch(e){ console.error(e); }
 }
 
-// SLIDER
+function animNum(id, target){
+  const el = document.getElementById(id);
+  let cur = 0;
+  const step = Math.ceil(target / 30);
+  const t = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = cur;
+    if(cur >= target) clearInterval(t);
+  }, 40);
+}
+
+/* ========================
+   SLIDER
+======================== */
 function renderSlider(){
   const wrap = document.getElementById('slider-wrap');
   const dots = document.getElementById('slider-dots');
   if(slides.length === 0){
-    wrap.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text2);font-size:.9rem;">Aucune image pour le moment</div>';
+    wrap.innerHTML = '<div class="loading">Aucune image pour le moment</div>';
     return;
   }
-  wrap.innerHTML = slides.map((s,i)=>`
+  wrap.innerHTML = slides.map((s,i) => `
     <div class="slide ${i===0?'active':''}" id="slide-${i}">
-      <img src="${s.image_url}" alt="${s.legende||''}" onerror="this.style.display='none'">
-      ${s.legende?`<div class="slide-caption">${s.legende}</div>`:''}
+      <img src="${s.image_url}" alt="${s.legende||''}" loading="${i===0?'eager':'lazy'}" onerror="this.style.display='none'">
+      <div class="slide-overlay"></div>
+      ${s.legende?`<div class="slide-caption"><strong>${s.legende}</strong></div>`:''}
     </div>
   `).join('');
-  dots.innerHTML = slides.map((_,i)=>`<div class="dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`).join('');
+  dots.innerHTML = slides.map((_,i) => `<div class="dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`).join('');
   clearInterval(slideInterval);
-  slideInterval = setInterval(()=>goSlide((currentSlide+1)%slides.length), 4000);
+  slideInterval = setInterval(() => goSlide((currentSlide+1)%slides.length), 4500);
 }
 function goSlide(n){
-  document.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i===n));
-  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===n));
-  currentSlide=n;
+  n = (n + slides.length) % slides.length;
+  document.querySelectorAll('.slide').forEach((s,i) => s.classList.toggle('active', i===n));
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===n));
+  currentSlide = n;
 }
 
-// COLLECTES
+/* ========================
+   COLLECTES
+======================== */
 function renderCollectes(){
   const g = document.getElementById('collectes-grid');
   const sel = document.getElementById('don-collecte');
   if(collectes.length===0){
-    g.innerHTML = '<div class="loading">Aucune collecte active pour le moment.</div>';
+    g.innerHTML = '<div class="empty">Aucune collecte active pour le moment.</div>';
+    sel.innerHTML = '<option disabled>Aucune collecte disponible</option>';
     return;
   }
-  g.innerHTML = collectes.map(c=>{
-    const pct = Math.min(100, Math.round((c.montant_actuel/c.objectif)*100)||0);
+  g.innerHTML = collectes.map(c => {
+    const pct = c.objectif > 0 ? Math.min(100, Math.round((c.montant_actuel/c.objectif)*100)) : 0;
     return `<div class="collecte-card">
-      <div class="collecte-nom">${c.nom}</div>
-      <div class="collecte-progress-wrap"><div class="collecte-progress" style="width:${pct}%"></div></div>
-      <div class="collecte-amounts">
-        <span><strong>${Number(c.montant_actuel).toLocaleString()} FCFA</strong> collectés</span>
-        <span>Objectif: ${Number(c.objectif).toLocaleString()} FCFA</span>
+      <div class="collecte-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
       </div>
-      <div style="font-size:.8rem;color:var(--accent);margin-top:.5rem;font-weight:600;">${pct}% atteint</div>
+      <div class="collecte-nom">${c.nom}</div>
+      <div class="prog-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
+      <div class="collecte-amounts">
+        <span><strong>${Number(c.montant_actuel).toLocaleString('fr-FR')} FCFA</strong> collectés</span>
+        <span>/ ${Number(c.objectif).toLocaleString('fr-FR')} FCFA</span>
+      </div>
+      <div class="collecte-pct">${pct}% de l'objectif atteint</div>
     </div>`;
   }).join('');
-  sel.innerHTML = collectes.map(c=>`<option value="${c.id}">${c.nom}</option>`).join('');
+  sel.innerHTML = collectes.map(c => `<option value="${c.id}">${c.nom}</option>`).join('');
 }
 
-// MEMBRES
+/* ========================
+   MEMBRES
+======================== */
 function renderMembres(membres){
   const g = document.getElementById('membres-grid');
   if(membres.length===0){
-    g.innerHTML = '<div class="loading">Aucun membre pour le moment.</div>';
+    g.innerHTML = '<div class="empty">Aucun membre pour le moment.</div>';
     return;
   }
-  g.innerHTML = membres.map(m=>`
+  g.innerHTML = membres.map(m => `
     <div class="membre-card" onclick="voirProfil('${m.id_unique}')">
-      <img class="membre-avatar" src="${m.photo_url||'https://ui-avatars.com/api/?name='+encodeURIComponent(m.nom)+'&background=1a7f5a&color=fff&size=80'}" alt="${m.nom}">
+      <img class="membre-avatar" src="${m.photo_url || avatarUrl(m.nom)}" alt="${m.nom}"
+        onerror="this.src='${avatarUrl(m.nom)}'">
       <div class="membre-nom">${m.nom}</div>
-      <div class="membre-role">${m.role||'Membre'}</div>
+      <div class="membre-role">${m.role || 'Membre'}</div>
       <span class="membre-qr">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="4" height="4" rx=".5"/></svg>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="4" height="4" rx=".5"/></svg>
         Profil
       </span>
     </div>
   `).join('');
 }
+function avatarUrl(nom){
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(nom)}&background=1a7f5a&color=fff&size=100&bold=true`;
+}
 
-// PROFIL MEMBRE
+/* ========================
+   PROFIL
+======================== */
 async function voirProfil(id){
   try {
     const r = await fetch(`${API}/cs/membre/${id}`);
     const d = await r.json();
-    if(!d.success) return;
+    if(!d.success) return showToast('Membre introuvable', true);
     const m = d.membre;
     const url = window.location.origin + '/membre/' + m.id_unique;
     document.getElementById('profil-content').innerHTML = `
-      <img class="profil-avatar" src="${m.photo_url||'https://ui-avatars.com/api/?name='+encodeURIComponent(m.nom)+'&background=1a7f5a&color=fff&size=120'}" alt="${m.nom}">
+      <button class="profil-close" onclick="closeProfil()">✕</button>
+      <img class="profil-avatar" src="${m.photo_url||avatarUrl(m.nom)}" alt="${m.nom}"
+        onerror="this.src='${avatarUrl(m.nom)}'">
       <div class="profil-nom">${m.nom}</div>
       <div class="profil-role">${m.role||'Membre'}</div>
-      <p class="profil-desc">${m.description||'Membre de l\'association Clean Street.'}</p>
-      <div class="profil-id">ID: ${m.id_unique}</div>
+      <p class="profil-desc">${m.description||"Membre engagé de l'association Clean Street."}</p>
+      <div class="profil-id">ID : ${m.id_unique}</div>
       <button class="btn btn-glass" style="width:100%;justify-content:center;margin-top:.5rem;" onclick="copierLien('${url}')">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         Copier le lien profil
       </button>
     `;
     document.getElementById('profil-page').classList.add('show');
-  } catch(e){ showToast('Erreur', true); }
+    document.body.style.overflow = 'hidden';
+  } catch(e){ showToast('Erreur réseau', true); }
 }
-function closeProfil(){ document.getElementById('profil-page').classList.remove('show'); }
+function closeProfil(){
+  document.getElementById('profil-page').classList.remove('show');
+  document.body.style.overflow = '';
+}
 function copierLien(url){
-  navigator.clipboard.writeText(url).then(()=>showToast('Lien copié !'));
+  navigator.clipboard.writeText(url).then(() => showToast('Lien copié dans le presse-papier !'));
 }
+document.getElementById('profil-page').addEventListener('click', function(e){
+  if(e.target === this) closeProfil();
+});
 
-// DON
+/* ========================
+   DON
+======================== */
 async function soumettredon(){
   const nom = document.getElementById('don-nom').value.trim();
   const collecte_id = document.getElementById('don-collecte').value;
   const montant = parseFloat(document.getElementById('don-montant').value);
   const txid = document.getElementById('don-txid').value.trim();
-  if(!nom||!montant||!txid||!collecte_id) return showToast('Remplissez tous les champs', true);
+  if(!nom || !montant || !txid || !collecte_id) return showToast('Remplissez tous les champs', true);
   if(montant < 100) return showToast('Montant minimum : 100 FCFA', true);
   try {
     const r = await fetch(`${API}/cs/don`, {
@@ -652,19 +937,20 @@ async function soumettredon(){
     });
     const d = await r.json();
     if(d.success){
-      showToast('Don enregistré ! En attente de validation.');
-      document.getElementById('don-nom').value='';
-      document.getElementById('don-montant').value='';
-      document.getElementById('don-txid').value='';
+      showToast('Don enregistré ! Merci pour votre soutien 💚');
+      document.getElementById('don-nom').value = '';
+      document.getElementById('don-montant').value = '';
+      document.getElementById('don-txid').value = '';
     } else showToast(d.message||'Erreur', true);
   } catch(e){ showToast('Erreur réseau', true); }
 }
 
-// CHECK URL POUR PROFIL DIRECT
+/* ========================
+   URL CHECK PROFIL
+======================== */
 function checkUrlProfil(){
-  const path = window.location.pathname;
-  const match = path.match(/\/membre\/([A-Z0-9]+)/i);
-  if(match) voirProfil(match[1]);
+  const m = window.location.pathname.match(/\/membre\/([A-Z0-9]+)/i);
+  if(m) voirProfil(m[1]);
 }
 
 loadData();
